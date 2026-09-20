@@ -18,7 +18,7 @@ export default function PrivacyPage() {
         </Link>
         <h1 className={`mt-4 ${headingTextClass}`}>개인정보처리방침</h1>
         <p className="mt-2 text-[13px] text-[var(--text-soft)]">
-          시행일: [배포 전 날짜를 채워주세요]
+          시행일: 2026년 9월 20일
         </p>
 
         <div className={`mt-8 space-y-8 ${bodyTextClass}`}>
@@ -71,9 +71,9 @@ export default function PrivacyPage() {
             <p className="mt-2">
               개인정보 관련 문의는 아래로 연락해 주세요.
               <br />
-              담당자: [담당자명을 채워주세요]
+              담당자: 차정은
               <br />
-              이메일: [연락처 이메일을 채워주세요]
+              이메일: chaje0119@naver.com
             </p>
           </section>
         </div>

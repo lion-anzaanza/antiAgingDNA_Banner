@@ -24,7 +24,7 @@ export default function WaitlistForm() {
 
   if (state?.status === "success" || state?.status === "duplicate") {
     return (
-      <div className={`${cardClass} p-6 text-center`} role="status">
+      <div className={`${cardClass} animate-pop-in p-6 text-center`} role="status">
         <p className="text-[20px] font-extrabold text-[var(--text)]">
           {state.status === "success" ? "신청 완료! 🎉" : "이미 신청하셨어요 🙂"}
         </p>
@@ -50,7 +50,7 @@ export default function WaitlistForm() {
           name="email"
           required
           placeholder="이메일 주소를 입력하세요"
-          className="min-h-[44px] min-w-0 flex-1 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--card-alpha)] px-4 py-3 text-[16px] text-[var(--text)] placeholder:text-[var(--text-soft)] backdrop-blur-sm focus:border-[var(--accent-lilac)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-lilac)]/30"
+          className="min-h-[44px] min-w-0 flex-1 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--card-alpha)] px-4 py-3 text-[16px] text-[var(--text)] placeholder:text-[var(--text-soft)] backdrop-blur-sm transition-colors duration-200 focus:border-[var(--accent-lilac)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-lilac)]/30"
         />
         <SubmitButton />
       </div>

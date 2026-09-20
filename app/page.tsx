@@ -27,6 +27,7 @@ import {
   headingTextClass,
   bodyTextClass,
   iconBadgeStyle,
+  iconHoverClass,
   accentCardStyle,
 } from "@/lib/ui";
 
@@ -213,9 +214,9 @@ export default function Home() {
             <div className="mt-10 grid gap-5 sm:grid-cols-2">
               {PROBLEMS.map((p, i) => (
                 <Reveal key={p.title} from={i === 0 ? "left" : "right"}>
-                  <div className={`${cardClass} h-full p-7 transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)]`}>
+                  <div className={`${cardClass} group h-full p-7 transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)]`}>
                     <div
-                      className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-sm)]"
+                      className={`flex h-12 w-12 items-center justify-center rounded-[var(--radius-sm)] ${iconHoverClass}`}
                       style={iconBadgeStyle(p.tint)}
                     >
                       <p.Icon width={24} height={24} />
@@ -247,10 +248,10 @@ export default function Home() {
               {CONCEPTS.map((c, i) => (
                 <Reveal key={c.title} from={i === 0 ? "left" : "right"}>
                   <div
-                    className={`${cardClass} flex flex-col items-center gap-5 p-7 text-center transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)] sm:flex-row sm:text-left`}
+                    className={`${cardClass} group flex flex-col items-center gap-5 p-7 text-center transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)] sm:flex-row sm:text-left`}
                   >
                     <div
-                      className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[var(--radius-md)]"
+                      className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-[var(--radius-md)] ${iconHoverClass}`}
                       style={iconBadgeStyle(c.tint)}
                     >
                       <c.Icon width={30} height={30} />
@@ -311,12 +312,12 @@ export default function Home() {
               {FEATURES.map((f, i) => (
                 <Reveal key={f.tag} from={i === 0 ? "left" : "right"}>
                   <div
-                    className="rounded-[var(--radius-lg)] p-8 shadow-[inset_0_1px_0_var(--highlight-top),var(--shadow-soft)] backdrop-blur-md transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)]"
+                    className="group rounded-[var(--radius-lg)] p-8 shadow-[inset_0_1px_0_var(--highlight-top),var(--shadow-soft)] backdrop-blur-md transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)]"
                     style={accentCardStyle(f.tint)}
                   >
                     <div className="flex items-start gap-5">
                       <div
-                        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[var(--radius-md)]"
+                        className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-[var(--radius-md)] ${iconHoverClass}`}
                         style={iconBadgeStyle(f.tint)}
                       >
                         <f.Icon width={26} height={26} />
@@ -411,17 +412,25 @@ export default function Home() {
         </section>
 
         <footer className="py-10">
-          <div className={`flex flex-col items-center gap-3 text-center text-[14px] text-[var(--text-soft)] ${containerClass}`}>
-            <Image src="/logo.png" alt="LifeDNA 로고" width={64} height={65} className="h-auto w-8" />
-            <p>LifeDNA · 개인 웰니스 셀프 트래킹 앱</p>
-            <Link
-              href="/privacy"
-              className="font-semibold underline underline-offset-2"
-              style={{ color: "var(--accent-lilac)" }}
-            >
-              개인정보처리방침
-            </Link>
-          </div>
+          <Reveal>
+            <div className={`flex flex-col items-center gap-3 text-center text-[14px] text-[var(--text-soft)] ${containerClass}`}>
+              <Image
+                src="/logo.png"
+                alt="LifeDNA 로고"
+                width={64}
+                height={65}
+                className="h-auto w-8 transition-transform duration-300 hover:scale-110"
+              />
+              <p>LifeDNA · 개인 웰니스 셀프 트래킹 앱</p>
+              <Link
+                href="/privacy"
+                className="font-semibold underline underline-offset-2 transition-colors duration-200 hover:text-[var(--accent-pink)]"
+                style={{ color: "var(--accent-lilac)" }}
+              >
+                개인정보처리방침
+              </Link>
+            </div>
+          </Reveal>
         </footer>
       </main>
     </>

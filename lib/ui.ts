@@ -19,7 +19,7 @@ export const buttonBaseClass =
 // 기본 CTA: 그라데이션 배경 + 흰 텍스트. glow=true면 은은한 컬러 글로우(넓은 공간용),
 // glow=false면 작은 공간(헤더 등)에서 뭉개지지 않도록 가벼운 그림자만.
 export function primaryButtonClass(glow: boolean = true) {
-  return `${buttonBaseClass} relative overflow-hidden text-[var(--text-on-accent)] hover:brightness-105 ${
+  return `${buttonBaseClass} group relative overflow-hidden text-[var(--text-on-accent)] hover:brightness-105 ${
     glow ? "shadow-[var(--shadow-glow)]" : "shadow-sm"
   }`;
 }
@@ -50,10 +50,12 @@ export function iconBadgeStyle(tint: string) {
   } as const;
 }
 
-// 시그니처 기능 카드: 은은한 틴트 배경 + 왼쪽 강조 바로 다른 카드들과 확실히 구분되게.
+// 시그니처 기능 카드: 은은한 틴트 배경으로 다른 카드들과 구분되게.
 export function accentCardStyle(tint: string) {
   return {
     background: `color-mix(in srgb, var(${tint}) 8%, var(--card-alpha))`,
-    borderLeft: `4px solid var(${tint})`,
   } as const;
 }
+
+// 카드 안 아이콘 배지: 카드에 마우스를 올리면(group-hover) 살짝 커지며 기울어진다.
+export const iconHoverClass = "transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3";

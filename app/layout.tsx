@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import MeshBackground from "@/components/MeshBackground";
 import "./globals.css";
 
@@ -42,6 +43,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full min-w-0 flex flex-col">
         <MeshBackground />
         {children}
+        {/* Vercel 방문 분석 — 쿠키 없이 방문·페이지뷰만 집계. 100명 목표의 전환율(방문 대비 신청) 확인용 */}
+        <Analytics />
       </body>
     </html>
   );

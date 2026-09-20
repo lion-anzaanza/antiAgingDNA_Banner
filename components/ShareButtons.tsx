@@ -5,7 +5,7 @@ import { PrimaryButton } from "./Button";
 
 const SHARE_TEXT =
   "웨어러블 없이도 나만의 웰니스 유전자를 만드는 앱, LifeDNA 사전예약 시작했어요!";
-const SHARE_URL = "https://lifedna.app"; // 실제 배포 도메인으로 교체 필요
+const SHARE_URL = "https://lifedna.anzaanza.cloud";
 
 export default function ShareButtons() {
   const [copied, setCopied] = useState(false);

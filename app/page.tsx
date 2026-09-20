@@ -6,7 +6,18 @@ import PhoneMockupCalendar from "@/components/PhoneMockupCalendar";
 import Reveal from "@/components/Reveal";
 import SectionGlow from "@/components/SectionGlow";
 import WaitlistForm from "@/components/WaitlistForm";
-import { AppsIcon, WatchIcon, DnaIcon, SparkleOrbIcon, HeartLinkIcon, NeighborhoodIcon } from "@/components/icons";
+import FaqItem from "@/components/FaqItem";
+import {
+  AppsIcon,
+  WatchIcon,
+  DnaIcon,
+  SparkleOrbIcon,
+  HeartLinkIcon,
+  NeighborhoodIcon,
+  LockIcon,
+  TagIcon,
+  CalendarIcon,
+} from "@/components/icons";
 import {
   cardClass,
   containerClass,
@@ -48,6 +59,61 @@ const CONCEPTS = [
     tint: "--accent-pink",
     title: "살아있는 컨디션 오브",
     desc: "오늘의 컨디션을 오브 하나로 시각화해요. 좋으면 푸른빛, 나빠지면 붉은빛으로 물들어요.",
+  },
+];
+
+const STEPS = [
+  {
+    title: "초기 진단",
+    desc: "온보딩 12문항으로 나의 기준선을 잡아요. 검증된 척도를 기반으로 해요.",
+  },
+  {
+    title: "매일 일지",
+    desc: "표준화된 항목을 60초 안에, 선택형 위주로 부담 없이 기록해요.",
+  },
+  {
+    title: "종합 점수",
+    desc: "기록을 근거 기준으로 환산해 오늘의 컨디션과 5영역 점수를 보여줘요.",
+  },
+  {
+    title: "맞춤 개선책",
+    desc: "오늘의 한 가지를 근거와 함께 제안하고, 실천을 추적해요.",
+  },
+];
+
+const FAQS = [
+  {
+    Icon: WatchIcon,
+    tint: "--accent-periwinkle",
+    q: "웨어러블 기기가 꼭 있어야 하나요?",
+    a: "아니요, 없어도 괜찮아요. LifeDNA는 스마트폰 하나로 기록하고 확인하도록 만들고 있어요. 스마트워치가 있으면 나중에 연동해서 더 정확하게 쓸 수 있지만, 시작하는 데는 전혀 필요하지 않아요.",
+  },
+  {
+    Icon: TagIcon,
+    tint: "--accent-pink",
+    q: "사전예약도 결제가 필요한가요?",
+    a: "아니요. 이메일 주소만 남기면 신청이 끝나요. 카드 등록이나 결제 없이 완전히 무료로 참여하실 수 있어요.",
+  },
+  {
+    Icon: LockIcon,
+    tint: "--accent-lilac",
+    q: "이메일은 어디에, 어떻게 쓰이나요?",
+    a: (
+      <>
+        출시 소식과 사전예약 안내를 보내드리는 용도로만 사용해요. 다른 목적으로 쓰지 않고, 원하시면 언제든
+        삭제를 요청하실 수 있어요. 자세한 내용은{" "}
+        <Link href="/privacy" className="font-bold underline underline-offset-2" style={{ color: "var(--accent-lilac)" }}>
+          개인정보처리방침
+        </Link>
+        에서 확인하실 수 있어요.
+      </>
+    ),
+  },
+  {
+    Icon: CalendarIcon,
+    tint: "--accent-periwinkle",
+    q: "언제쯤 만나볼 수 있나요?",
+    a: "아직 정확한 날짜는 정하지 않았어요(Coming Soon). 대신 사전예약해주신 분들께 출시 소식을 가장 먼저, 딱 한 번만 이메일로 알려드릴게요.",
   },
 ];
 
@@ -200,9 +266,39 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features — 페리윙클 존, 틴트+좌측 강조바로 톤을 확실히 다르게 */}
+        {/* How It Works — 페리윙클 존, 4단계 순환 */}
         <section className="relative">
-          <SectionGlow tint="--accent-periwinkle" position="left" animate="animate-mesh-c" />
+          <SectionGlow tint="--accent-periwinkle" position="right" animate="animate-mesh-c" />
+          <div className={`py-24 ${containerClass}`}>
+            <Reveal>
+              <p className={eyebrowClass}>How It Works</p>
+              <h2 className={`mt-2 text-center ${headingTextClass}`}>이용 방법</h2>
+              <p className={`mx-auto mt-3 max-w-[46ch] text-center text-[var(--text-soft)] ${bodyTextClass}`}>
+                진단으로 시작해서, 매일 기록하고, 점수로 확인하고, 개선책을 실천하는 순환이에요.
+              </p>
+            </Reveal>
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {STEPS.map((s, i) => (
+                <Reveal key={s.title} className={i % 2 === 1 ? "delay-100" : ""}>
+                  <div className={`${cardClass} group h-full p-6 transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)]`}>
+                    <span
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[13px] font-extrabold text-white transition-transform duration-300 group-hover:scale-110"
+                      style={{ background: "var(--grad-main)" }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-4 text-[17px] font-bold">{s.title}</h3>
+                    <p className={`mt-1.5 text-[var(--text-soft)] ${bodyTextClass}`}>{s.desc}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Features — 핑크 존, 틴트 배경으로 톤을 확실히 다르게 */}
+        <section className="relative">
+          <SectionGlow tint="--accent-pink" position="left" animate="animate-mesh-a" />
           <div className={`py-24 ${containerClass}`}>
             <Reveal>
               <p className={eyebrowClass}>Together</p>
@@ -248,6 +344,27 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ — 라일락 존, 아코디언 */}
+        <section className="relative">
+          <SectionGlow tint="--accent-lilac" position="right" animate="animate-mesh-b" />
+          <div className={`py-24 ${containerClass}`}>
+            <Reveal>
+              <p className={eyebrowClass}>FAQ</p>
+              <h2 className={`mt-2 text-center ${headingTextClass}`}>자주 묻는 질문</h2>
+              <p className={`mx-auto mt-3 max-w-[46ch] text-center text-[var(--text-soft)] ${bodyTextClass}`}>
+                사전예약 전에 궁금하실 만한 것들을 미리 정리해봤어요.
+              </p>
+            </Reveal>
+            <div className="mx-auto mt-10 flex max-w-[680px] flex-col gap-4">
+              {FAQS.map((f, i) => (
+                <Reveal key={f.q} className={i % 2 === 1 ? "delay-100" : ""}>
+                  <FaqItem icon={<f.Icon width={20} height={20} />} tint={f.tint} q={f.q} a={f.a} />
                 </Reveal>
               ))}
             </div>

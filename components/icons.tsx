@@ -81,3 +81,22 @@ export function NeighborhoodIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function TagIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M11 4h6a2 2 0 0 1 2 2v6L10 21 3 14 11 4Z" />
+      <circle cx="14.5" cy="8.5" r="1.4" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function CalendarIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="4" y="5.5" width="16" height="14.5" rx="3" />
+      <path d="M8 3.5v4M16 3.5v4M4 10h16" />
+      <path d="M8.5 14.5h2M13.5 14.5h2" />
+    </svg>
+  );
+}

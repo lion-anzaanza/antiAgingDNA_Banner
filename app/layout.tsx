@@ -2,9 +2,30 @@ import type { Metadata } from "next";
 import MeshBackground from "@/components/MeshBackground";
 import "./globals.css";
 
+const SITE_URL = "https://lifedna.anzaanza.cloud";
+const TITLE = "LifeDNA — 사전예약";
+const DESCRIPTION = "매일의 기록으로 나를 유전자처럼 읽어내는 웰니스 앱, LifeDNA 사전예약";
+
 export const metadata: Metadata = {
-  title: "LifeDNA — 사전예약",
-  description: "매일의 기록으로 나를 유전자처럼 읽어내는 웰니스 앱, LifeDNA 사전예약",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  // SNS(카카오톡·인스타그램·X 등)에 링크를 올릴 때 보이는 미리보기 카드
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: "LifeDNA",
+    title: TITLE,
+    description: DESCRIPTION,
+    locale: "ko_KR",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "LifeDNA 사전예약" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

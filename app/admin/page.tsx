@@ -36,10 +36,20 @@ export default async function AdminPage() {
     );
   }
 
+  // 표에는 최신 ROW_LIMIT건만 그리고, 총인원은 count로 따로 센다
+  // (select만 쓰면 Supabase 기본 상한 1000건에서 숫자가 조용히 잘린다).
+  const ROW_LIMIT = 500;
   const supabase = getSupabaseAdminClient();
-  const { data, error } = supabase
-    ? await supabase.from("waitlist").select("email, created_at").order("created_at", { ascending: false })
-    : { data: null, error: { message: "환경변수(SUPABASE_SERVICE_ROLE_KEY)가 설정되지 않았어요." } };
+  const { data, count, error } = supabase
+    ? await supabase
+        .from("waitlist")
+        .select("email, created_at", { count: "exact" })
+        .order("created_at", { ascending: false })
+        .limit(ROW_LIMIT)
+    : { data: null, count: null, error: { message: "관리자 설정이 아직 끝나지 않았어요." } };
+
+  const total = count ?? data?.length ?? 0;
+  const truncated = data ? total > data.length : false;
 
   return (
     <main className={`py-16 ${containerClass}`}>
@@ -63,8 +73,9 @@ export default async function AdminPage() {
       ) : (
         <>
           <p className="mt-3 text-[18px] text-[var(--text-soft)]">
-            지금까지 <span className="font-extrabold text-[var(--text)]">{data?.length ?? 0}명</span>이
-            신청했어요. 30초마다 자동으로 새로고침됩니다.
+            지금까지 <span className="font-extrabold text-[var(--text)]">{total}명</span>이 신청했어요.
+            30초마다 자동으로 새로고침됩니다.
+            {truncated && ` 아래 표에는 최근 ${data?.length ?? 0}명만 보여드려요.`}
           </p>
 
           <div className={`${cardClass} mt-6 overflow-hidden`}>

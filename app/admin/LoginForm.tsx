@@ -37,9 +37,7 @@ export default function LoginForm() {
           <span className="text-[var(--danger)]">비밀번호가 맞지 않아요.</span>
         )}
         {state?.status === "not_configured" && (
-          <span className="text-[var(--danger)]">
-            아직 관리자 비밀번호가 설정되지 않았어요. (ADMIN_PASSWORD 필요)
-          </span>
+          <span className="text-[var(--danger)]">아직 관리자 설정이 끝나지 않았어요.</span>
         )}
       </div>
     </form>
